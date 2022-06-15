@@ -1,14 +1,16 @@
+using ProjetoRedeHoteis.lib.Exception;
+
 namespace ProjetoRedeHoteis.lib.Models
 {
     public class Hospede
     {
         public string Nome { get; set;}
-        public string Cpf { get; set; }
+        public double Cpf { get; set; }
         public string Email { get; set; }
-        public double Telefone { get; set; }
+        public string Telefone { get; set; }
         public DateTime DataNascimento { get; set; }
 
-        public Hospede (string nome, string cpf, string email, double telefone, DateTime dataNascimento)
+        public Hospede (string nome, double cpf, string email, string telefone, DateTime dataNascimento)
         {
             SetNome(nome);
             SetCpf(cpf);
@@ -24,12 +26,13 @@ namespace ProjetoRedeHoteis.lib.Models
         {
             Nome = nome;
         }
-        public string GetCpf()
+        public double GetCpf()
         {
             return Cpf;
         }
-        public void SetCpf (string cpf)
+        public void SetCpf (double cpf)
         {
+            ValidarCpf(cpf);
             Cpf = cpf;
         }
         public string GetEmail()
@@ -38,14 +41,16 @@ namespace ProjetoRedeHoteis.lib.Models
         }
         public void SetEmail (string email)
         {
+            ValidarEmail(email);
             Email = email;
         }
-        public double GetTelefone()
+        public string GetTelefone()
         {
             return Telefone;
         }
-        public void SetTelefone (double telefone)
+        public void SetTelefone (string telefone)
         {
+            ValidarTelefone(telefone);
             Telefone = telefone;
         }
         public DateTime GetDataNascimento()
@@ -56,6 +61,29 @@ namespace ProjetoRedeHoteis.lib.Models
         {
             DataNascimento = dataNascimento;
         }
+        public void ValidarEmail(string email)
+        {
+            if (email.Contains("@"))
+            {
+                throw new ErroDeValidacaoException ("Email invalido falta de caracter @");
+            }
+            Email = email;
+        }
+        public void ValidarTelefone(string telefone)
+        {
+            if (telefone.Length < 15)
+            {
+                throw new ErroDeValidacaoException ("Telefone invalido");
+            }
+        }
+        public void ValidarCpf(double cpf)
+        {
+            if (cpf < 12)
+            {
+                throw new ErroDeValidacaoException ("CPF somente números");
+            }
+        }
+        
 
 
     }

@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.lib.Exception;
+
 namespace ProjetoRedeHoteis.lib.Models
 {
     public class Estadia
@@ -26,6 +28,7 @@ namespace ProjetoRedeHoteis.lib.Models
         }
         public void SetDataSaida (DateTime dataSaida)
         {
+            ValidarDataDeSaida(dataSaida);
             DataSaida = dataSaida;
         }
         public string GetResponsavel()
@@ -35,6 +38,14 @@ namespace ProjetoRedeHoteis.lib.Models
         public void SetResponsavel (string responsavel)
         {
             Responsavel = responsavel;
+        }
+        public void ValidarDataDeSaida(DateTime dataSaida)
+        {
+            if (dataSaida != DateTime.Now)
+            {
+                throw new ErroDeValidacaoException ("Data de saida menor que entrada");
+            }
+            DataSaida = dataSaida;
         }
 
     }

@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.lib.Exception;
+
 namespace ProjetoRedeHoteis.lib.Models
 {
     public class TipoDeQuarto
@@ -36,6 +38,7 @@ namespace ProjetoRedeHoteis.lib.Models
         }
         public void SetOcupacaoMaximo (double ocupacaoMaximo)
         {
+            ValidarOcupacaoMaxima(ocupacaoMaximo);
             OcupacaoMaxima = ocupacaoMaximo;
         }
         public double GetNumeroDeCamas()
@@ -45,6 +48,15 @@ namespace ProjetoRedeHoteis.lib.Models
         public void SetNumeroDeCamas (double numeroDeCamas)
         {
             NumeroDeCamas = numeroDeCamas;
+        }
+        public void ValidarOcupacaoMaxima(double ocupacaoMaximo)
+        {
+            if (OcupacaoMaxima >4)
+            {
+                throw new ErroDeValidacaoException ("Ocupação máxima maior que 3 ultrapassada");
+            }
+            OcupacaoMaxima = ocupacaoMaximo;
+
         }
     }
 }
