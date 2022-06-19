@@ -47,6 +47,14 @@ namespace ProjetoRedeHoteis.lib.Models
             }
             DataSaida = dataSaida;
         }
+        public void ValidarOcupacaoMaximaDeHospede(double hospede, double ocupacaoMaxima)
+        {
+            if (hospede > ocupacaoMaxima)
+            {
+                throw new ErroDeValidacaoException ("Numero de Hospedes excedeu o maximo");
+            }
+            ocupacaoMaxima = hospede;
+        }
 
     }
 }
