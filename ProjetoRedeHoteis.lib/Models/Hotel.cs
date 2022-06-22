@@ -2,6 +2,9 @@ namespace ProjetoRedeHoteis.lib.Models
 {
     public class Hotel
     {
+        public int Id { get; set; }
+        public List<Quarto> Quartos { get; set; }
+        public List<ServicoXHotel> ServicosXHoteis { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }
         public double Cep { get; set; }

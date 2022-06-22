@@ -21,7 +21,7 @@ namespace ProjetoRedeHoteis.web.Controllers
             {
                 Log.LogInformation("SetEstadia");
                 Log.LogWarning("SetEstadia");
-                var estadia = new Estadia(estadiaDTO.DataEntrada, estadiaDTO.DataSaida, estadiaDTO.Responsavel)
+                var estadia = new Estadia(estadiaDTO.DataEntrada, estadiaDTO.DataSaida, estadiaDTO.Responsavel);
                 Estadias.Add(estadiaDTO);
                 return Ok(Estadias);
             }
@@ -30,24 +30,23 @@ namespace ProjetoRedeHoteis.web.Controllers
                 Log.LogError(ex.Message);
                 return BadRequest(ex.Message);
             }
-
-            [HttpGet("GetEstadia")]
-
-            public IActionResult GetEstadia()
-            {
-                return Ok(Estadias);
-            }
-
-            [HttpDelete]
-
-            public IActionResult DeleteEstadia(Estadia estadia)
-            {
-                var index = Estadias.Count<EstadiaDTO>();
-                Estadias.RemoveAt(index -1);
-                return Ok(estadia);
-            }
-
         }
 
+        [HttpGet("GetEstadia")]
+
+        public IActionResult GetEstadia()
+        {
+            return Ok(Estadias);
+        }
+            
+
+        [HttpDelete]
+
+        public IActionResult DeleteEstadia(Estadia estadia)
+        {
+            var index = Estadias.Count<EstadiaDTO>();
+            Estadias.RemoveAt(index -1);
+            return Ok(estadia);
+        }
     }
 }
