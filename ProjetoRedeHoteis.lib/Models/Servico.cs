@@ -1,6 +1,6 @@
 namespace ProjetoRedeHoteis.lib.Models
 {
-    public class Servico
+    public class Servico : ModelBase
     {
         public int Id { get; set; }
         public List<Estadia> Estadias { get; set; }

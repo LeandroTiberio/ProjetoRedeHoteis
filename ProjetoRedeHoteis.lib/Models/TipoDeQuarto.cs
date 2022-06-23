@@ -2,7 +2,7 @@ using ProjetoRedeHoteis.lib.Exception;
 
 namespace ProjetoRedeHoteis.lib.Models
 {
-    public class TipoDeQuarto
+    public class TipoDeQuarto : ModelBase
     {
         public int Id { get; set; }
         public List<TipoDeQuarto> TipoDeQuartos { get; set; }

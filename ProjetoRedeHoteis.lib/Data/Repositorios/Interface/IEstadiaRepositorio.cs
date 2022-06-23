@@ -4,6 +4,6 @@ namespace ProjetoRedeHoteis.lib.Data.Repositorios.Interface
 {
     public interface IEstadiaRepositorio : IRepositorioBase<Estadia>
     {
-         
+        
     }
 }

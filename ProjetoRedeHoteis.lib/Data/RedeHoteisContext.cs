@@ -20,27 +20,36 @@ namespace ProjetoRedeHoteis.lib.Data
                         .HasForeignKey(x => x.id_responsavel);
 
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Hospede>().ToTable("hopedes");
+            modelBuilder.Entity<Hospede>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
+            modelBuilder.Entity<Hospede>()
+                        .HasOne(x => x.EstadiaXHospede)                     
+                        .WithMany(x => x.Hospedes)
+                        .HasForeignKey(x => x.id_Hospede);
+
+
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<EstadiaXHospede>().ToTable("Estadias_X_Hospedes");
             modelBuilder.Entity<EstadiaXHospede>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<EstadiaXHospede>()
                         .HasOne(x => x.Estadias) //Indica a propriedade do relacionamento One = 1 Many = N
                         .HasOne(x => x.Estadia_X_Hospede)
-                        .HasForeignKey(x => x.id_Hospede);
+                        .HasForeignKey(x => x.id_Estadia);
 
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Hotel>().ToTable("hotel");
             modelBuilder.Entity<Hotel>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<Hotel>()  
-                        .HasOne(x => x.Quartos)
-                        .WithMany(x =>x.ServicosXHoteis)
+                        .HasMany(x => x.Quartos)
+                        .WithMany(x =>x.Hotel)
                         .HasForeignKey(x => x.id_Hotel);
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Quarto>().ToTable("quarto");
             modelBuilder.Entity<Quarto>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<Quarto>()
-                        .HasOne(X => X.TiposDeQuarto)
+                        .HasMany(X => X.TiposDeQuarto)
                         .WithMany(x =>x.Quarto)
                         .HasForeignKey(x => x.id_tipos_quartos);                             
 
