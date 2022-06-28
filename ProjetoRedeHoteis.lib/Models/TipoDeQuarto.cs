@@ -5,7 +5,9 @@ namespace ProjetoRedeHoteis.lib.Models
     public class TipoDeQuarto : ModelBase
     {
         public int Id { get; set; }
-        public List<TipoDeQuarto> TipoDeQuartos { get; set; }
+        public List<Quarto> Quartos { get; set; }
+        public virtual Quarto Quarto { get; set; }
+        public int IdTiposDeQuarto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public double OcupacaoMaxima { get; set; }

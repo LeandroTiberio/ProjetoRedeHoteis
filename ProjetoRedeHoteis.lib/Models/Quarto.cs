@@ -5,8 +5,9 @@ namespace ProjetoRedeHoteis.lib.Models
         public int Id { get; set; }
         public int IdHotel { get; set; }
         public int IdTiposDeQuarto { get; set; }
-        
-        public List<TipoDeQuarto> TiposDeQuartos { get; set;}
+        public virtual Hotel Hotel {get; set; }
+        public List<TipoDeQuarto> TiposDeQuartos { get; set; }
+        public virtual TipoDeQuarto TipoDeQuarto { get; set;}
         public double Numero { get; set; }
         public double Andar { get; set; }
 

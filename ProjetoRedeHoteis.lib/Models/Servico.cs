@@ -3,8 +3,8 @@ namespace ProjetoRedeHoteis.lib.Models
     public class Servico : ModelBase
     {
         public int Id { get; set; }
-        public List<Estadia> Estadias { get; set; }
-        public List<ServicoXHotel> ServicosXHOteis { get; set; }
+        public Estadia Estadia { get; set; }
+        public List<ServicoXHotel> ServicosXHoteis { get; set; }
         public string Nome { get; set; }
 
         public Servico (string nome)

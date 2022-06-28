@@ -5,10 +5,12 @@ namespace ProjetoRedeHoteis.lib.Models
     public class Estadia : ModelBase
     {
         public int Id { get; set; }
-        public int IdResponsavel {get; set;}
+        public int IdEstadia {get; set;}
         public int IdQuarto { get; set; }
+        public List<ServicoXHotel> ServicosXHotel { get; set; }
         public List<EstadiaXHospede> EstadiasXHospedes { get; set; }
         public List<Hospede> Hospedes {get; set; } 
+        public Hospede Hospede { get; set; }
         public DateTime DataEntrada { get; set; }
         public DateTime DataSaida { get; set; }
         public string Responsavel { get; set; }

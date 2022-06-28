@@ -5,6 +5,8 @@ namespace ProjetoRedeHoteis.lib.Models
         public int Id {get; set; }
         public int IdHotel { get; set; }
         public int IdEstadia { get; set; }
+        public Hotel Hotel {get; set; }
+        
         
     }
 }
