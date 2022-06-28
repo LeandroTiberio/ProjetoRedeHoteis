@@ -74,10 +74,7 @@ namespace ProjetoRedeHoteis.lib.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Servico>().ToTable("Servico");
             modelBuilder.Entity<Servico>().HasKey(key => key.Id);//Indica a propriedade da chave primaria, no caso Id
-            modelBuilder.Entity<Servico>()
-                        .HasOne(x => x.Estadia) //Indica a propriedade do relacionamento One = 1 Many = N
-                        .WithMany(x => x.ServicosXHotel)
-                        .HasForeignKey(x => x.IdEstadia);
+           
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ServicoXHotel>().ToTable("Servico_X_Hoteis");
