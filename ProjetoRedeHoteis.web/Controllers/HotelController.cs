@@ -1,6 +1,8 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.web.Properties.DTOs;
+using ProjetoRedeHoteis.web.Properties.DTOs.RespostaHttp;
 
 namespace ProjetoRedeHoteis.web.Controllers
 {
@@ -39,7 +41,17 @@ namespace ProjetoRedeHoteis.web.Controllers
         {
             return Ok(Hoteis);
         }
-
+        
+        [HttpGet("CEP")]
+        public async Task<string> BuscarEnderecoPorCEP(string cep)
+        {
+            var client = new HttpClient();
+            var retorno = await client.GetAsync("https://viacep.com.br/ws/"+cep+"/json/");
+            var endereco = await retorno.Content.ReadAsStringAsync();
+            var resposta = JsonSerializer.Deserialize<ViaCepRespostaHttp>(cep);
+            return endereco;
+        }   
+            
         [HttpDelete]
         public IActionResult DeleteHotel(Hotel hotel)
         {
