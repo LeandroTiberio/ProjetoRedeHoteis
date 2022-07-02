@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjetoRedeHoteis.lib.Data.Repositorios;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.web.Properties.DTOs;
 
@@ -8,43 +9,43 @@ namespace ProjetoRedeHoteis.web.Controllers
     [Route("[controller]")]
     public class QuartoController : ControllerBase
     {
-        public static List<QuartoDTO> Quartos { get; set; } = new List<QuartoDTO>();
-        public ILogger<QuartoController> Log { get; set; }
-        public QuartoController(ILogger<QuartoController> log)
-        {
-            Log = log;
-        }
-        [HttpPost("SetQuarto")]
-
-        public IActionResult SetQuarto(QuartoDTO quartoDTO)
-        {
-            try
-            {
-                Log.LogInformation("SetQuarto");
-                Log.LogWarning("SetQuarto");
-                var quarto = new Quarto(quartoDTO.Numero, quartoDTO.Andar);
-                Quartos.Add(quartoDTO);
-                return Ok(Quartos);
-            }
-            catch (System.Exception ex)
-            {
-                Log.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
-        }
+        private readonly QuartoRepositorio _repositorio; 
         
-        [HttpGet("GetQuarto")]
-        public IActionResult GetQuarto()
+        public QuartoController(QuartoRepositorio _repositorio)
         {
-            return Ok(Quartos);
+            _repositorio = _repositorio;
+        }
+    
+
+        [HttpGet()]
+        public async Task<IActionResult> BuscarTodos()
+        {
+           return Ok(await _repositorio.BuscarTodosAsync());
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetQuartoId(int id)
+        {
+            return Ok(await _repositorio.BuscarPorIdAsync(id));
+        }
+        [HttpPost()]
+        public async Task<IActionResult> Adicionar(Quarto quarto)
+        {
+            return Ok(await _repositorio.AdicionarAsync(quarto));
         }
 
-        [HttpDelete]
-        public IActionResult DeleteQuarto(Quarto quarto)
+        [HttpPut()]
+        public async Task<IActionResult> Atualizar(Quarto idQuarto)
         {
-            var index = Quartos.Count<QuartoDTO>();
-            Quartos.RemoveAt(index -1);
-            return Ok(quarto);
+            return Ok(await _repositorio.AtualizarAsync(idQuarto));
         }
+       
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            _repositorio.DeletarAsync(id);
+            return Ok();
+        }
+
     }
 }

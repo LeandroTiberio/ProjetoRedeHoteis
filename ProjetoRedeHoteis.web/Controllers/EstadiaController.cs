@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoRedeHoteis.web.Properties.DTOs;
 using ProjetoRedeHoteis.lib.Models;
+using ProjetoRedeHoteis.lib.Data.Repositorios;
 
 namespace ProjetoRedeHoteis.web.Controllers
 {
@@ -8,45 +9,44 @@ namespace ProjetoRedeHoteis.web.Controllers
     [Route("[controller]")]
     public class EstadiaController : ControllerBase
     {
-        public static List<EstadiaDTO> Estadias { get; set; } = new List<EstadiaDTO>();
-        public ILogger<EstadiaController> Log { get; set; }
-        public EstadiaController(ILogger<EstadiaController> log)
+        private readonly EstadiaRepositorio _repositorio; 
+        
+        public EstadiaController(EstadiaRepositorio _repositorio)
         {
-            Log = log;
+            _repositorio = _repositorio;
         }
-        [HttpPost("SetEstadia")]
-        public IActionResult SetEstadia(EstadiaDTO estadiaDTO)
+    
+
+        [HttpGet()]
+        public async Task<IActionResult> BuscarTodos()
         {
-            try
-            {
-                Log.LogInformation("SetEstadia");
-                Log.LogWarning("SetEstadia");
-                var estadia = new Estadia(estadiaDTO.DataEntrada, estadiaDTO.DataSaida, estadiaDTO.Responsavel);
-                Estadias.Add(estadiaDTO);
-                return Ok(Estadias);
-            }
-            catch (SystemException ex)
-            {
-                Log.LogError(ex.Message);
-                return BadRequest(ex.Message);
-            }
+           return Ok(await _repositorio.BuscarTodosAsync());
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEstadiaId(int id)
+        {
+            return Ok(await _repositorio.BuscarPorIdAsync(id));
+        }
+        [HttpPost()]
+        public async Task<IActionResult> Adicionar(int IdEstadia,  string Hospede)
+        {
+            return Ok(await _repositorio.AdicionarAsync(IdEstadia, Hospede));
         }
 
-        [HttpGet("GetEstadia")]
-
-        public IActionResult GetEstadia()
+        [HttpPut()]
+        public async Task<IActionResult> Atualizar(Estadia idEstadia)
         {
-            return Ok(Estadias);
+            return Ok(await _repositorio.AtualizarAsync(idEstadia));
         }
-            
+       
 
-        [HttpDelete]
-
-        public IActionResult DeleteEstadia(Estadia estadia)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deletar(int id)
         {
-            var index = Estadias.Count<EstadiaDTO>();
-            Estadias.RemoveAt(index -1);
-            return Ok(estadia);
+            _repositorio.DeletarAsync(id);
+            return Ok();
         }
+
+
     }
 }
