@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetoRedeHoteis.web.Properties.DTOs;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.lib.Data.Repositorios;
+using ProjetoRedeHoteis.lib.Exception;
 
 namespace ProjetoRedeHoteis.web.Controllers
 {
@@ -22,23 +23,31 @@ namespace ProjetoRedeHoteis.web.Controllers
         {
            return Ok(await _repositorio.BuscarTodosAsync());
         }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHospedeId(int id)
         {
             return Ok(await _repositorio.BuscarPorIdAsync(id));
         }
+        
         [HttpPost()]
-        public async Task<IActionResult> Adicionar(Hospede hospede)
+        public async Task<IActionResult> Adicionar(HospedeDTO hospedeDTO)
         {
-            return Ok(await _repositorio.AdicionarAsync(hospede));
+            try
+            {
+                var hospede = new Hospede(hospedeDTO.Nome, hospedeDTO.Cpf, hospedeDTO.Email, hospedeDTO.Telefone,
+                                            hospedeDTO.DataNascimento);
+                await _repositorio.AdicionarAsync(hospede);
+                return Ok();                            
+            }
+            catch (ErroDeValidacaoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
-        [HttpPut()]
-        public async Task<IActionResult> Atualizar(Hospede idHospede)
-        {
-            return Ok(await _repositorio.AtualizarAsync(idHospede));
-        }
-       
+        
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Deletar(int id)

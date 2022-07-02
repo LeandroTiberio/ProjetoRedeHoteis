@@ -66,11 +66,7 @@ namespace ProjetoRedeHoteis.web.Controllers
             
         }
 
-        [HttpPut()]
-        public async Task<IActionResult> Atualizar(int IdHotel, string endereco)
-        {
-            return Ok(await _repositorio.AtualizarAsync(IdHotel, endereco));
-        }
+        
        
 
         [HttpDelete("{id}")]
