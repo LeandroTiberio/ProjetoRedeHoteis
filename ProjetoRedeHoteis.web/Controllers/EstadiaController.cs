@@ -3,6 +3,7 @@ using ProjetoRedeHoteis.web.Properties.DTOs;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.lib.Data.Repositorios;
 using ProjetoRedeHoteis.lib.Exception;
+using ProjetoRedeHoteis.lib.Data.Repositorios.Interface;
 
 namespace ProjetoRedeHoteis.web.Controllers
 {
@@ -10,9 +11,9 @@ namespace ProjetoRedeHoteis.web.Controllers
     [Route("[controller]")]
     public class EstadiaController : ControllerBase
     {
-        private readonly EstadiaRepositorio _repositorio; 
+        private readonly IEstadiaRepositorio _repositorio; 
         
-        public EstadiaController(EstadiaRepositorio _repositorio)
+        public EstadiaController(IEstadiaRepositorio _repositorio)
         {
             _repositorio = _repositorio;
         }

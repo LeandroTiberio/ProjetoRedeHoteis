@@ -3,6 +3,7 @@ using ProjetoRedeHoteis.web.Properties.DTOs;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.lib.Data.Repositorios;
 using ProjetoRedeHoteis.lib.Exception;
+using ProjetoRedeHoteis.lib.Data.Repositorios.Interface;
 
 namespace ProjetoRedeHoteis.web.Controllers
 {
@@ -10,9 +11,9 @@ namespace ProjetoRedeHoteis.web.Controllers
     [Route("[controller]")]
     public class HospedeController : ControllerBase
     {
-        private readonly HospedeRepositorio _repositorio; 
+        private readonly IHospedeRepositorio _repositorio; 
         
-        public HospedeController(HospedeRepositorio _repositorio)
+        public HospedeController(IHospedeRepositorio _repositorio)
         {
             _repositorio = _repositorio;
         }

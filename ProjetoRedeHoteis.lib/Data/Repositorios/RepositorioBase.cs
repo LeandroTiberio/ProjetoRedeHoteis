@@ -26,12 +26,7 @@ namespace ProjetoRedeHoteis.lib.Data.Repositorios
             await _dbset.AddAsync(item);
             await _context.SaveChangesAsync();
         }
-        public async Task AtualizarAsync(int IdHotel, string endereco)
-        {
-            var item = await _dbset.AsNoTracking().FirstAsync(x => x.Id == IdHotel);
-            await _context.SaveChangesAsync();
-            
-        }
+       
          public async Task DeletarAsync(int id)
         {
             var item = await _dbset.AsNoTracking().FirstAsync(x => x.Id == id);

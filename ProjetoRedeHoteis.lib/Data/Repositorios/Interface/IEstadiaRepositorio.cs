@@ -1,4 +1,4 @@
-using ProjetoRedeHoteis.lib.Models;
+ using ProjetoRedeHoteis.lib.Models;
 
 namespace ProjetoRedeHoteis.lib.Data.Repositorios.Interface
 {

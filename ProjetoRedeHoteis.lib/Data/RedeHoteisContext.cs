@@ -19,16 +19,13 @@ namespace ProjetoRedeHoteis.lib.Data
                         .WithMany(x => x.Hospedes)
                         .HasForeignKey(x => x.IdResponsavel);
 
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Hospede>().ToTable("hopedes");
-            modelBuilder.Entity<Hospede>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
+            
             modelBuilder.Entity<Hospede>()
                         .HasMany(x => x.EstadiasXHospedes)                     
                         .WithOne(x => x.Hospede)
                         .HasForeignKey(x => x.IdHospede);
 
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<EstadiaXHospede>().ToTable("Estadias_X_Hospedes");
             modelBuilder.Entity<EstadiaXHospede>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<EstadiaXHospede>()
@@ -37,7 +34,6 @@ namespace ProjetoRedeHoteis.lib.Data
                         .HasForeignKey(x => x.IdEstadia);
 
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Hotel>().ToTable("hotel");
             modelBuilder.Entity<Hotel>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<Hotel>()  
@@ -45,7 +41,7 @@ namespace ProjetoRedeHoteis.lib.Data
                         .WithOne(x =>x.Hotel)
                         .HasForeignKey(x => x.IdHotel);
 
-            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Quarto>().ToTable("quarto");
             modelBuilder.Entity<Quarto>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<Quarto>()
@@ -53,7 +49,7 @@ namespace ProjetoRedeHoteis.lib.Data
                         .WithMany(x =>x.Quartos)
                         .HasForeignKey(x => x.IdTiposDeQuarto);                             
 
-            base.OnModelCreating(modelBuilder);
+    
             modelBuilder.Entity<Estadia>().ToTable("estadias");
             modelBuilder.Entity<Estadia>().HasKey(key => key.Id); //Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<Estadia>()
@@ -62,8 +58,6 @@ namespace ProjetoRedeHoteis.lib.Data
                         .HasForeignKey(x => x.IdQuarto);
 
             
-            
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TipoDeQuarto>().ToTable("TipoDeQuarto");
             modelBuilder.Entity<TipoDeQuarto>().HasKey(key => key.Id);//Indica a propriedade da chave primaria, no caso Id
             modelBuilder.Entity<TipoDeQuarto>()
@@ -71,12 +65,11 @@ namespace ProjetoRedeHoteis.lib.Data
                         .WithMany(x => x.TiposDeQuartos)
                         .HasForeignKey(x => x.IdTiposDeQuarto);
             
-            base.OnModelCreating(modelBuilder);
+        
             modelBuilder.Entity<Servico>().ToTable("Servico");
             modelBuilder.Entity<Servico>().HasKey(key => key.Id);//Indica a propriedade da chave primaria, no caso Id
            
 
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ServicoXHotel>().ToTable("Servico_X_Hoteis");
             modelBuilder.Entity<ServicoXHotel>().HasKey(key => key.Id);
             modelBuilder.Entity<ServicoXHotel>()

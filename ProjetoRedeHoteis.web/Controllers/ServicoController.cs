@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoRedeHoteis.lib.Data.Repositorios;
+using ProjetoRedeHoteis.lib.Data.Repositorios.Interface;
 using ProjetoRedeHoteis.lib.Exception;
 using ProjetoRedeHoteis.lib.Models;
 using ProjetoRedeHoteis.web.Properties.DTOs;
@@ -10,9 +11,9 @@ namespace ProjetoRedeHoteis.web.Controllers
     [Route("[controller]")]
     public class ServicoController : ControllerBase
     {
-        private readonly ServicoRepositorio _repositorio; 
+        private readonly IServicoRepositorio _repositorio; 
         
-        public ServicoController(ServicoRepositorio _repositorio)
+        public ServicoController(IServicoRepositorio _repositorio)
         {
             _repositorio = _repositorio;
         }

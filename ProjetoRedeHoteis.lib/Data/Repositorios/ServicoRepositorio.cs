@@ -11,5 +11,6 @@ namespace ProjetoRedeHoteis.lib.Data.Repositorios
         {
             _context = context;
         }
+      
     }
 }
